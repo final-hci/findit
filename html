@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIt - Lost and Found</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    
+    <aside class="sidebar">
+        <h2>FindIt</h2>
+        <p id="welcomeUser"></p>
+
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('inventory')">Browse Items</button>
+        <button onclick="showPage('report')">Report Item</button>
+        <button onclick="showPage('matches')">Possible Matches</button>
+        <button onclick="showPage('claims')">Claim Requests</button>
+        <button id="adminButton" class="hidden" onclick="showPage('admin')">Admin Panel</button>
+
+        <button class="logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="content">
+
+        <section id="dashboard" class="page">
+            <h1>Dashboard</h1>
+            <p>Welcome to FindIt!</p>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Reports</h3>
+                    <h1 id="totalItems">0</h1>
+                </div>
+                <div class="stat-card">
+                    <h3>Lost Items</h3>
+                    <h1 id="lostItems">0</h1>
+                </div>
+                <div class="stat-card">
+                    <h3>Found Items</h3>
+                    <h1 id="foundItems">0</h1>
+                </div>
+                <div class="stat-card">
+                    <h3>Returned Items</h3>
+                    <h1 id="returnedItems">0</h1>
+                </div>
+            </div>
+
+            <h2>Recent Reports</h2>
+            <div id="recentItems" class="item-container"></div>
+        </section>
+
+        <section id="inventory" class="page hidden">
+            <h1>Browse Items</h1>
+
+            <div class="search-area">
+                <input type="text" id="searchInput"
+                    placeholder="Search item..." oninput="displayItems()">
+
+                <select id="filterType" onchange="displayItems()">
+                    <option value="all">All Items</option>
+                    <option value="lost">Lost Items</option>
+                    <option value="found">Found Items</option>
+                </select>
+
+                <select id="filterCategory" onchange="displayItems()">
+                    <option value="all">All Categories</option>
+                    <option>Electronics</option>
+                    <option>Personal Items</option>
+                    <option>Documents</option>
+                    <option>Clothing</option>
+                    <option>Accessories</option>
+                    <option>Others</option>
+                </select>
+            </div>
+
+            <div id="allItems" class="item-container"></div>
+        </section>
+
+        <section id="report" class="page hidden">
+            <h1>Report an Item</h1>
+
+            <div class="form-box">
+                <form id="itemForm">
+                    <label>Report Type</label>
+                    <select id="itemType" required>
+                        <option value="lost">Lost Item</option>
+                        <option value="found">Found Item</option>
+                    </select>
+
+                    <label>Item Name</label>
+                    <input type="text" id="itemName" required>
+
+                    <label>Category</label>
+                    <select id="itemCategory">
+                        <option>Electronics</option>
+                        <option>Personal Items</option>
+                        <option>Documents</option>
+                        <option>Clothing</option>
+                        <option>Accessories</option>
+                        <option>Others</option>
+                    </select>
+
+                    <label>Color</label>
+                    <input type="text" id="itemColor">
+
+                    <label>Description</label>
+                    <textarea id="itemDescription" required></textarea>
+
+                    <label>Location</label>
+                    <input type="text" id="itemLocation" required>
+
+                    <label>Date</label>
+                    <input type="date" id="itemDate" required>
+
+                    <label>Contact Information</label>
+                    <input type="text" id="itemContact" required>
+
+                    <label>Item Image</label>
+                    <input type="file" id="itemImage" accept="image/*">
+
+                    <button type="submit">Submit Report</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="matches" class="page hidden">
+            <h1>Possible Matches</h1>
+            <p>Items that have similar details will appear here.</p>
+            <div id="matchContainer"></div>
+        </section>
+
+        <section id="claims" class="page hidden">
+            <h1>Claim Requests</h1>
+            <div id="claimContainer"></div>
+        </section>
+
+        <section id="admin" class="page hidden">
+            <h1>Administrator Dashboard</h1>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Registered Users</h3>
+                    <h1 id="userCount">0</h1>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Claims</h3>
+                    <h1 id="pendingCount">0</h1>
+                </div>
+            </div>
+
+            <h2>Manage Reports</h2>
+            <div id="adminItems"></div>
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
